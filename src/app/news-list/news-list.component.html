@@ -1,0 +1,62 @@
+<div class="title">Actions</div>
+<div>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="crawling()"
+    [disabled]="isCrawling"
+  >
+    <span [style.marginRight.px]="6">
+      {{ isCrawling ? "crawling" : "Crawl and Push" }}
+    </span>
+    <mat-icon>directions_run</mat-icon>
+  </button>
+</div>
+<div class="title">News List</div>
+<div class="table-container">
+  <div class="loading-shade" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="no">
+      <th mat-header-cell *matHeaderCellDef [style.minWidth.px]="40">No.</th>
+      <td mat-cell *matCellDef="let element; index as i">
+        {{ i + 1 }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef [style.maxWidth.px]="200">Title</th>
+      <td mat-cell *matCellDef="let element">
+        <a mat-button [href]="element.src" target="_blank">{{
+          element.title
+        }}</a>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef [style.minWidth.px]="80">
+        Actions
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="delete"
+          (click)="openDialog(element)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="warn"
+          aria-label="delete"
+          (click)="delete(element.id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

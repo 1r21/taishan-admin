@@ -1,0 +1,16 @@
+<main *ngIf="!isLoginUrl">
+  <mat-toolbar color="primary">
+    <span>Taishan Admin</span>
+    <span class="spacer" [style]="'flex: 1 1 auto;'"></span>
+    <div class="logout-container">
+      <span>{{ user?.userName }}</span>
+      <button mat-icon-button (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+<router-outlet *ngIf="isLoginUrl"></router-outlet>

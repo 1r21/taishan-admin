@@ -1,0 +1,40 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>Sign in</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content class="content">
+      <mat-form-field [style.width]="'80%'">
+        <input
+          matInput
+          required
+          type="text"
+          placeholder="User Name"
+          maxlength="10"
+          [(ngModel)]="userName"
+          (keyup.enter)="onSubmit()"
+        />
+      </mat-form-field>
+      <mat-form-field [style.width]="'80%'">
+        <input
+          matInput
+          required
+          type="password"
+          placeholder="Password"
+          maxlength="15"
+          [(ngModel)]="password"
+          (keyup.enter)="onSubmit()"
+        />
+        <mat-error *ngIf="errorMsg">{{ errorMsg }}</mat-error>
+      </mat-form-field>
+      <button
+        mat-flat-button
+        class="submit"
+        [disabled]="!canSubmitted || isLoading"
+        color="primary"
+        (click)="onSubmit()"
+      >
+        {{ isLoading ? "loading" : "Sign in" }}
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>
