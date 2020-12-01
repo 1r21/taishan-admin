@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  web:
+    image: nginx:alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/templates/default.conf.template
+      - ./dist:/dist
+    ports:
+      - "80:80"
+    environment:
+      - ROOT_DIR=dist
+      - NGINX_PROT=80
+      - SERVER_NAME=tainshan.com
+      - API_SERVER=http://localhost:8080
+

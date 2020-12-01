@@ -4,11 +4,12 @@ import { EmptyError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService, NewsElement } from '../news.service';
+import { LocalStorageService } from '../cache/local-storage.service';
 
 @Component({
   selector: 'app-news-list',
   templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.less'],
+  styleUrls: ['./news-list.component.scss'],
 })
 export class NewsListComponent implements OnInit {
   displayedColumns: string[] = ['no', 'title', 'actions'];
@@ -19,14 +20,17 @@ export class NewsListComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private snackBar: MatSnackBar,
+    private store: LocalStorageService,
     public dialog: MatDialog
   ) {}
   ngOnInit() {
     this.getNews();
   }
   openDialog(news: NewsElement) {
+    const localTheme = this.store.get('theme');
     this.dialog.open(NewsDetailDialog, {
       data: news,
+      panelClass: localTheme?.value === 'dark' ? 'unicorn-dark-theme' : '',
     });
   }
   getNews() {
@@ -64,7 +68,7 @@ export class NewsListComponent implements OnInit {
 @Component({
   selector: 'news-detail-dialog',
   templateUrl: './news-detail.dialog.html',
-  styleUrls: ['./news-list.component.less'],
+  styleUrls: ['./news-list.component.scss'],
 })
 export class NewsDetailDialog {
   constructor(

@@ -8,7 +8,7 @@ import { EmptyError } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less'],
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, DoCheck {
   canSubmitted = false;
@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit, DoCheck {
     /**
      * Innocent until proven guilty
      */
+    if (!this.canSubmitted) return;
     this.isLoading = true;
     this.userService
       .postLogin(this.userName, this.password)

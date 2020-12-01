@@ -50,7 +50,9 @@ export class DefaultInterceptor implements HttpInterceptor {
           const body: any = event.body;
           const { code, data, message } = body;
           if (code !== 0) {
-            this.store.remove('user');
+            if (String(code).includes('30')) {
+              this.store.remove(user);
+            }
             return throwError(message);
           }
           return of(event.clone({ body: data }));
