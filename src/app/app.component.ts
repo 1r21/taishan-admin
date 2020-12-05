@@ -22,12 +22,12 @@ export class AppComponent implements OnInit {
     const localTheme = this.store.get('theme');
     this.isDarkTheme = localTheme?.value === 'dark';
     if (window.matchMedia) {
-      window
-        .matchMedia('(prefers-color-scheme: dark)')
-        .addEventListener('change', (event) => {
-          this.isDarkTheme = event.matches;
-          this.storeTheme();
-        });
+      const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
+      this.isDarkTheme = mediaQueryList.matches;
+      mediaQueryList.addEventListener('change', (event) => {
+        this.isDarkTheme = event.matches;
+        this.storeTheme();
+      });
     }
 
     this.router.events.subscribe((data) => {

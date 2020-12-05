@@ -5,11 +5,11 @@ import { LoginComponent } from './login/login.component';
 import { NewsListComponent } from './news-list/news-list.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   pathMatch: 'full',
-  //   redirectTo: 'news',
-  // },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'news',
+  },
   {
     path: 'login',
     component: LoginComponent,
