@@ -22,4 +22,9 @@ export class ApiService {
       id,
     });
   }
+  pushNews(id: number) {
+    return this.http.post<{ message: string }>('/admin/send/news', {
+      id,
+    });
+  }
 }

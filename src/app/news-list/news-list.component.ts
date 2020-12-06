@@ -12,7 +12,7 @@ import { LocalStorageService } from '../cache/local-storage.service';
   styleUrls: ['./news-list.component.scss'],
 })
 export class NewsListComponent implements OnInit {
-  displayedColumns: string[] = ['no', 'title', 'actions'];
+  displayedColumns: string[] = ['no', 'title', 'summary', 'date', 'actions'];
   dataSource: NewsElement[] = [];
   isLoading = true;
   isCrawling = false;
@@ -46,6 +46,9 @@ export class NewsListComponent implements OnInit {
     this.apiService.deleteNews(id).subscribe(() => {
       this.getNews();
     });
+  }
+  push(id: number) {
+    this.apiService.pushNews(id).subscribe();
   }
   crawling() {
     this.isCrawling = true;

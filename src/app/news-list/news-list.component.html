@@ -19,21 +19,39 @@
   </div>
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="no">
-      <th mat-header-cell *matHeaderCellDef [style.minWidth.px]="40">No.</th>
-      <td mat-cell *matCellDef="let element; index as i">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td
+        mat-cell
+        *matCellDef="let element; index as i"
+        [style.maxWidth.px]="80"
+      >
         {{ i + 1 }}
       </td>
     </ng-container>
     <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef [style.maxWidth.px]="200">Title</th>
-      <td mat-cell *matCellDef="let element">
-        <a mat-button [href]="element.src" target="_blank">{{
-          element.title
-        }}</a>
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+      <td mat-cell *matCellDef="let element" [style.maxWidth.px]="220">
+        <span>{{ element.title }}</span>
+        <a mat-button [href]="element.src" target="_blank">
+          <mat-icon>link</mat-icon>
+        </a>
+        <a mat-icon-button [href]="element.source" target="_blank">
+          <mat-icon>link</mat-icon>
+        </a>
       </td>
     </ng-container>
+    <ng-container matColumnDef="summary">
+      <th mat-header-cell *matHeaderCellDef>Summary</th>
+      <td mat-cell *matCellDef="let element" [style.maxWidth.px]="200">
+        {{ element.summary }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef [style.width.px]="120">Date</th>
+      <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+    </ng-container>
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef [style.minWidth.px]="80">
+      <th mat-header-cell *matHeaderCellDef [style.width.px]="140">
         Actions
       </th>
       <td mat-cell *matCellDef="let element">
@@ -52,6 +70,14 @@
           (click)="delete(element.id)"
         >
           <mat-icon>delete</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="warn"
+          aria-label="delete"
+          (click)="push(element.id)"
+        >
+          <mat-icon>send</mat-icon>
         </button>
       </td>
     </ng-container>
