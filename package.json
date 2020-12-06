@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "gen-image": "docker build -t taishan-admin:alpine ."
+    "docker": "npm run build && docker build -t admin:taishan ."
   },
   "private": true,
   "dependencies": {
